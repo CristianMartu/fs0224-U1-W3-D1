@@ -51,7 +51,8 @@ console.log(sum)
 const number = [5, 10, 15]
 const sumNumber = function (number) {
   const result = number.reduce(
-    (accumulator, currentValue) => accumulator + currentValue
+    (accumulator, currentValue) => accumulator + currentValue,
+    0
   )
   return result
 }
@@ -211,33 +212,67 @@ const movies = [
   Scrivi una funzione per trovare il film più vecchio nell'array fornito.
 */
 const oldFilm = function (obj) {
+  let year = 0
   const result = obj.forEach((film) => {
-    let total = []
-    return total.push(film.Year)
+    if (film.Year > year) year = film.Year
   })
-  return result
+  return year
 }
 console.log(oldFilm(movies))
+
 /* ESERCIZIO 10
   Scrivi una funzione per ottenere il numero di film contenuti nell'array fornito.
 */
+const numberOfFilm = function (obj) {
+  return obj.length
+}
+console.log(numberOfFilm(movies))
 
 /* ESERCIZIO 11 (map)
   Scrivi una funzione per creare un array con solamente i titoli dei film contenuti nell'array fornito.
 */
+const filmsTitle = function (obj) {
+  const result = obj.map((film) => film.Title)
+  return result
+}
+console.log(filmsTitle(movies))
 
 /* ESERCIZIO 12 (filter)
   Scrivi una funzione per ottenere dall'array fornito solamente i film usciti nel millennio corrente.
 */
+const modernFilm = function (obj) {
+  const result = obj.filter((film) => film.Year > 2000)
+  return result
+}
+console.log(modernFilm(movies))
 
 /* ESERCIZIO 13 (reduce)
   Scrivi una funzione per calcolare la somma di tutti gli anni in cui sono stati prodotti i film contenuti nell'array fornito.
 */
+const sumYear = function (obj) {
+  const result = obj.reduce((accumulator, currentValue) => {
+    // console.log('ACCUMULATOR', accumulator)
+    // console.log('CURR VALUE', parseInt(currentValue.Year))
+    return accumulator + parseInt(currentValue.Year)
+  }, 0)
+  return result
+}
+console.log(sumYear(movies))
 
 /* ESERCIZIO 14 (find)
   Scrivi una funzione per ottenere dall'array fornito uno specifico film (la funzione riceve un imdbID come parametro).
 */
+const findFilmId = function (obj, id) {
+  const result = obj.find((film) => film.imdbID === id)
+  return result
+}
+console.log(findFilmId(movies, 'tt2395427'))
 
 /* ESERCIZIO 15 (findIndex)
   Scrivi una funzione per ottenere dall'array fornito l'indice del primo film uscito nell'anno fornito come parametro.
 */
+const findFilmIndex = function (obj, year) {
+  const result = obj.findIndex((film) => parseInt(film.Year) === year)
+  return obj[result]
+}
+console.log(findFilmIndex(movies, 2012))
